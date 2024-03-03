@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package tags;
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/ihatiko/protoc-gen-go-tags/protoc/tags;annotations";
+
+message Custom {
+  string key = 1;
+  string value = 2;
+}
+
+extend google.protobuf.FieldOptions {
+  string json = 847930;
+  string validate = 847931;
+  string query = 847932;
+  string param = 847933;
+  repeated Custom custom = 847934;
+  string db = 847935;
+}

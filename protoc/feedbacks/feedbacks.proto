@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package feedbacks;
+option go_package = ".;feedbacks";
+import "protoc/tags/tags.proto";
+
+message FeedbackRequest {
+  string order_id = 1 [
+    (tags.json) = "abs",
+    (tags.validate) = "uuid",
+    (tags.custom) = {
+      key: "schema",
+      value: "some-schema"
+    },
+    (tags.custom) = {
+      key: "schema",
+      value: "some-schema"
+    },
+    (tags.custom) = {
+      key: "schema",
+      value: "some-schema"
+    }
+  ];
+}
