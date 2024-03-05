@@ -77,6 +77,10 @@ func processing(file *protogen.File) {
 		panic(err)
 	}
 	filePath := filepath.Join(path, strings.ReplaceAll(*file.Proto.Name, ".proto", ".pb.go"))
+	_, err = os.Stat(filePath)
+	if os.IsNotExist(err) {
+		return
+	}
 	node, err := parser.ParseFile(fSet, filePath, nil, parser.ParseComments)
 	if err != nil {
 		panic(err)
