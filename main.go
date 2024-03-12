@@ -158,6 +158,7 @@ func collectExtensions(opts *descriptorpb.FieldOptions) map[string]string {
 		annotations.E_Validate,
 		annotations.E_Query,
 		annotations.E_Db,
+		annotations.E_Header,
 	}
 	for _, i := range tags {
 		switch extension := proto.GetExtension(opts, i).(type) {
