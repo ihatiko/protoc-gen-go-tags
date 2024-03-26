@@ -90,6 +90,20 @@ func processing(file *protogen.File) {
 	replacer := make(map[string]Field)
 	for _, message := range file.Messages {
 		msg := message.Desc.Name()
+		for range message.Oneofs {
+			for _, field := range message.Fields {
+				opts, ok := field.Desc.Options().(*descriptorpb.FieldOptions)
+				if !ok || opts == nil {
+					continue
+				}
+				tags := collectExtensions(opts)
+				if len(tags) > 0 {
+					replacer[string(fmt.Sprintf("%s_%s", msg, field.GoName))] = map[string]Tags{
+						field.GoName: tags,
+					}
+				}
+			}
+		}
 		fields := make(map[string]Tags)
 		for _, field := range message.Fields {
 			opts, ok := field.Desc.Options().(*descriptorpb.FieldOptions)

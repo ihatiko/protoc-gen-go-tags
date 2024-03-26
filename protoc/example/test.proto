@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package example;
+
+option go_package = ".;example";
+import "protoc/tags/tags.proto";
+
+
+message ExampleCase {
+  oneof fine_type {
+    string field_string = 1 [(tags.validate) = "uuid"];
+    int32 field_int32 = 2 [(tags.validate) = "uuid"];
+  }
+  string field_1 = 3;
+}
